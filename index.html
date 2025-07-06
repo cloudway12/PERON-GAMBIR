@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAPAN DISPLAY INFORMASI GAMBIR</title>
+</head>
+<body>
+    <div class="train-info">
+    <h2>GAMBIR INFORMATION DISPLAY</h2>
+
+      <div id="clock">05 : 59 : 00</div>
+
+    <div class="panel">
+      <h3> | ARGO MERBABU</h3>
+      <p>TO</p>
+      <h1>SEMARANG TAWANG</h1>
+      <p>BANK JATENG</p>
+      <p class="time">06.00</p>
+    </div>
+     
+    <div class="platform-box">
+    <span class="platform-label">Peron</span>
+    <span class="platform-num">1</span>
+  </div>
+</div>
+
+
+     <div class="panel">
+      <h3> SEMBRANI</h3>
+      <P>TO</P>
+      <h1>SURABAYA PASAR TURI</h1>
+      <p></p>
+      <p class="time">09.30</p>
+    </div>
+
+     <div class="platform-box">
+    <span class="platform-label">Peron</span>
+    <span class="platform-num">2</span>
+  </div>
+</div>
+   
+    <div class="panel">
+      <h3> TAKSAKA </h3>
+      <p>TO</p>
+      <h1>YOGYAKARTA </h1>
+      <p></p>
+      <p class="time">07.20</p>
+    </div>
+
+   <div class="platform-box">
+    <span class="platform-label">Peron</span>
+    <span class="platform-num">3</span>
+  </div>
+</div>
+
+  </div>
+
+  <!-- Bagian teks berjalan -->
+  <div class="ticker-container">
+    <div class="ticker">
+      <p>Stasiun berikutnya: Juanda HATI HATI JALUR 3 KA 1167 MELINTAS LANGSUNG
+        PERIKSA DAN TELITI KEMBALI BARANG BAWAAN ANDA JANGAN SAMPAI TERTINGGAL ATAU TERTUKAR
+      </p> <br>
+
+    </div>
+  </div>
+
+ 
+</div>
+
+  <style>
+  body {
+  font-family: Arial, sans-serif;
+  background:darkblue;
+  color: white;
+  margin: 0;
+  padding: 20px;
+}
+
+.train-info {
+  max-width: 600px;
+  margin: auto;
+}
+
+#clock {
+  font-size: 2.2rem;
+  font-weight: 600;
+  text-align: right;
+  margin: 0 0 15px 0;
+  text-shadow: 0 0 6px #000;
+
+}
+
+.h5{
+ font-size: 3.5rem;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  background-color: #000;
+}
+
+.panel {
+  background: #1a2c49;
+  border: 3px solid #ffcc00;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+}
+
+.panel h3 {
+  margin: 0 0 10px;
+  color: #ffcc00;
+}
+
+.panel .time {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+/* Bagian ticker berjalan */
+.ticker-container {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #ffcc00;
+  overflow: hidden;
+  color: #000;
+}
+
+.ticker {
+  display: inline-block;
+  white-space: nowrap;
+  padding-left: 100%;
+  animation: scroll-left 10s linear infinite;
+}
+
+.ticker p {
+  display: inline;
+  font-weight: bold;
+  font-size: 1.2em;
+  padding: 10px 0;
+  justify-content: space-between;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.panel{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;     /* bikin rata tengah vertikal */
+  background:#0d2460;
+  border:3px solid #ffcc00;
+  border-radius:8px;
+  padding:18px 20px;
+  margin:18px 0;
+}
+
+.platform-box{
+  background:#0056d2;
+  color:#fff;
+  width:72px;
+  text-align:center;
+  border-radius:4px;
+  padding: 8px 10px 5px;
+  flex-shrink:0;          /* jangan mengecil */
+}
+.platform-label{font-size:12px;display:block;margin-bottom:4px}
+.platform-num  {font-size:32px;font-weight:700;line-height:1}
+
+  </style>
+
+<script>
+    function updateTime() {
+  const panels = document.querySelectorAll('.panel');
+  panels.forEach((panel, index) => {
+    const timeEl = panel.querySelector('.time');
+    const now = new Date();
+    timeEl.textContent = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+  });
+}
+
+setInterval(updateTime, 60000);
+updateTime();
+
+function updateClock() {
+  const now   = new Date();
+  const clock = document.getElementById('clock');
+  clock.textContent =
+    pad(now.getHours()) + ' : ' +
+    pad(now.getMinutes()) + ' : ' +
+    pad(now.getSeconds());
+}
+
+// ▶︎ jam kecil di setiap panel (jika tetap ingin)
+function updateTime() {
+  const now    = new Date();
+  const panels = document.querySelectorAll('.panel .time');
+  panels.forEach(el => {
+    el.textContent = pad(now.getHours()) + ':' pad(now.getMinutes());
+  });
+}
+
+// jalankan
+updateClock();
+updateTime();
+setInterval(updateClock, 1000);   // setiap detik
+setInterval(updateTime, 60000);   // setiap menit
+
+</script>
+
+</body>
+</html>
